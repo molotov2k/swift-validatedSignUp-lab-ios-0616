@@ -106,14 +106,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <connections>
-                        <outlet property="emailTextField" destination="iEG-2m-S7q" id="f6U-Yx-lLM"/>
-                        <outlet property="firstTextField" destination="PEH-Ca-1lh" id="NtT-af-KdU"/>
-                        <outlet property="lastNameTextField" destination="afg-Cl-HbV" id="Qde-yK-pGx"/>
-                        <outlet property="passwordTextField" destination="eow-Z9-bNG" id="dN9-BI-bBn"/>
-                        <outlet property="submitButton" destination="I50-a8-2vB" id="mok-se-EGK"/>
-                        <outlet property="userNameTextField" destination="Ok9-R3-Aqh" id="aAg-Gv-c1l"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSc-YJ-aRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
