@@ -19,19 +19,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         lastNameTextField.delegate = self
         passwordTextField.delegate = self
         userNameTextField.delegate = self
         emailTextField.delegate = self
         firstTextField.delegate = self
-    
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        
-        textFieldShouldReturn(textField)
-        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
@@ -44,19 +37,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             if let firstNameText = firstTextField.text{
                 
-                if moreThanZero && hasDigits(firstNameText){
+                if moreThanZero && !hasDigits(firstNameText){
                     
                     lastNameTextField.enabled = true
                     lastNameTextField.becomeFirstResponder()
                     
                 }else{
                     
-                    let alert = UIAlertView.init(title: "Validation Error", message: <#T##String#>, delegate: <#T##UIAlertViewDelegate?#>, cancelButtonTitle: <#T##String?#>, otherButtonTitles: <#T##String#>, <#T##moreButtonTitles: String...##String#>)
-//                    
-//                    UIAlertView *newAlert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"First Name must have more than 0 characters and no numbers" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Clear", nil];
-                    //    [newAlert show];
-
-                    
+                    showAlert(firstTextField)
+                    lastNameTextField.enabled = false
+                    submitButton.enabled = false
                 }
             }
             
@@ -64,14 +54,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             if let lastNameText = lastNameTextField.text{
                 
-                if moreThanZero && hasDigits(lastNameText){
+                if moreThanZero && !hasDigits(lastNameText){
                     
                     emailTextField.enabled = true
+                    emailTextField.becomeFirstResponder()
                     
                 }else{
                     
-                    
-                    
+                    showAlert(lastNameTextField)
+                    emailTextField.enabled = false
+                    submitButton.enabled = false
                 }
             }
             
@@ -80,114 +72,102 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             if let emailText = emailTextField.text{
                 
-                if moreThanZero && hasDigits(emailText){
+                if moreThanZero && validateEmail(emailText){
                     
                     userNameTextField.enabled = true
+                    userNameTextField.becomeFirstResponder()
                     
                 }else{
                     
                     
-                    
+                    showAlert(emailTextField)
+                    userNameTextField.enabled = false
+                    submitButton.enabled = false
                 }
             }
-            
             
         case userNameTextField:
             
             if let userNameText = userNameTextField.text{
                 
-                if moreThanZero && hasDigits(userNameText){
+                if moreThanZero && !hasDigits(userNameText){
+                    
                     
                     passwordTextField.enabled = true
+                    passwordTextField.becomeFirstResponder()
                     
                 }else{
                     
-                    
-                    
+                    showAlert(userNameTextField)
+                    passwordTextField.enabled = false
+                    submitButton.enabled = false
                 }
             }
-            
             
         case passwordTextField:
             
             if let passwordText = passwordTextField.text{
                 
-                if moreThanZero && hasDigits(passwordText){
+                if passwordText.characters.count > 6 && hasDigits(passwordText){
                     
                     submitButton.enabled = true
+                    firstTextField.becomeFirstResponder()
                     
-                }else{
+                    UIView.animateWithDuration(0.25, animations: {
+                        
+                        self.submitButton.titleLabel?.textColor = UIColor.blueColor()
+                        self.loadViewIfNeeded()
+                    })
                     
-                    
-                    
+                }else {
+                    submitButton.enabled = false
                 }
             }
             
         default:
             
-            <#code#>
+            break
         }
+        
+        return true
     }
     
     func hasDigits(string: String) -> Bool{
         
-        // return [input rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location != NSNotFound;
+        let decimalChars = NSCharacterSet.decimalDigitCharacterSet()
+        let decimalRange = string.rangeOfCharacterFromSet(decimalChars)
+        
+        if decimalRange != nil {
+
+            return true
+        }
+
+        return false
+    }
+    
+    func showAlert(textfield: UITextField){
+        
+        
+        let alert = UIAlertController(title: "Invalid Entry", message: "Please Enter A Valid Entry", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "Clear", style: UIAlertActionStyle.Cancel, handler: { (action) in
+            
+            textfield.text?.removeAll()
+            
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
-
-//    //    }
-//    }
-//    else if (textField == self.lastName)
-//    {
-//    if ([textField.text length]>0 && ![self hasDigits:textField.text]) {
-//    self.email.enabled = YES;
-//    [self.email becomeFirstResponder];
-//    } else
-//    {
-//    self.selectedTextField=textField;
-//    UIAlertView *newAlert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"Last Name must have more than 0 characters and no numbers" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Clear", nil];
-//    [newAlert show];
-//    }
-//    }
-//    else if (textField == self.email)
-//    {
-//    if ([textField.text length]>0 && [self validateEmail:textField.text]) {
-//    self.userName.enabled = YES;
-//    [self.userName becomeFirstResponder];
-//    } else
-//    {
-//    self.selectedTextField=textField;
-//    UIAlertView *newAlert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"Email must have more than 0 characters and be a valid format" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Clear", nil];
-//    [newAlert show];
-//    }
-//    }
-//    else if (textField == self.userName)
-//    {
-//    if ([textField.text length]>0 && ![self hasDigits:textField.text]) {
-//    self.password.enabled = YES;
-//    [self.password becomeFirstResponder];
-//    } else
-//    {
-//    self.selectedTextField=textField;
-//    UIAlertView *newAlert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"username must have more than 0 characters and no numbers" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Clear", nil];
-//    [newAlert show];
-//    }
-//    }
-//    else if (textField == self.password)
-//    {
-//    if ([textField.text length]>6) {
-//    self.submitButton.enabled = YES;
-//    } else
-//    {
-//    self.selectedTextField=textField;
-//    UIAlertView *newAlert = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:@"password must have more than 6 characters" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"Clear", nil];
-//    [newAlert show];
-//    }
-//    }
-//    return YES;
-//    }
-
-
+    func validateEmail(text: String) -> Bool {
+        
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        return emailPredicate.evaluateWithObject(text)
+    }
 }
 

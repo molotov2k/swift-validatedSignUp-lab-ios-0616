@@ -21,7 +21,7 @@
       * No Digits
     * Password:
       * > 6 characters
-  4. When the user taps return one each field. You should validate it, then present a [UIAlertController](http://useyourloaf.com/blog/2014/09/05/uialertcontroller-changes-in-ios-8.html) with an appropriate error message. The alert view should have two buttons: `OK` and `Clear`. When you press `Clear` it should clear the currently editing textfield.
+  4. When the user taps return on each field - you should validate it, then present a ```UIAlertController``` with an appropriate error message. The alert view should have two buttons: `OK` and `Clear`. When you press `Clear` it should clear the currently editing textfield.
   5. Start with only the first textfield `enabled`. If a textfield passes validation, then set the `enabled` property of the _next_ textfield to `true` (and so on and so forth).
   6. When the final textfield is correct, enable the sign up button.
 
