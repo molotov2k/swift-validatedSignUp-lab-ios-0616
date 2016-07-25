@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="height" constant="30" id="74h-qb-dJ4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="afg-Cl-HbV">
                                 <rect key="frame" x="40" y="77" width="520" height="30"/>
@@ -34,7 +34,7 @@
                                     <constraint firstAttribute="height" constant="30" id="wsJ-Z3-7MI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iEG-2m-S7q">
                                 <rect key="frame" x="40" y="119" width="520" height="30"/>
@@ -42,7 +42,7 @@
                                     <constraint firstAttribute="height" constant="30" id="4qU-6V-bfT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ok9-R3-Aqh">
                                 <rect key="frame" x="40" y="161" width="520" height="30"/>
@@ -50,7 +50,7 @@
                                     <constraint firstAttribute="height" constant="30" id="xuC-Rc-Z18"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eow-Z9-bNG">
                                 <rect key="frame" x="40" y="203" width="520" height="30"/>
@@ -58,7 +58,7 @@
                                     <constraint firstAttribute="height" constant="30" id="4mH-Ba-wK6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I50-a8-2vB">
                                 <rect key="frame" x="145" y="419" width="310" height="67"/>
@@ -70,6 +70,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitButtonTapped:" destination="uC3-1d-UKF" eventType="touchUpInside" id="5oL-2g-gNd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,6 +109,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="submitButton" destination="I50-a8-2vB" id="lDD-cg-Xb3"/>
+                        <outletCollection property="textFields" destination="PEH-Ca-1lh" collectionClass="NSMutableArray" id="wRj-i0-HFv"/>
+                        <outletCollection property="textFields" destination="afg-Cl-HbV" collectionClass="NSMutableArray" id="Bb1-RV-sel"/>
+                        <outletCollection property="textFields" destination="iEG-2m-S7q" collectionClass="NSMutableArray" id="9aY-cq-n8H"/>
+                        <outletCollection property="textFields" destination="Ok9-R3-Aqh" collectionClass="NSMutableArray" id="gE0-IT-ynX"/>
+                        <outletCollection property="textFields" destination="eow-Z9-bNG" collectionClass="NSMutableArray" id="6SA-wb-4WR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DSc-YJ-aRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
